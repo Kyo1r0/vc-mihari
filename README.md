@@ -89,20 +89,39 @@ node test-notification.js
 
 `deploy/vc-mihari.service` を雛形として用意しています。`User`、`WorkingDirectory`、`ExecStart` のパスを環境に合わせて書き換えてから設置してください。
 
-```
-sudo cp deploy/vc-mihari.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable --now vc-mihari
-```
+    sudo cp deploy/vc-mihari.service /etc/systemd/system/
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now vc-mihari
 
-ログの確認:
+状態とログの確認:
 
-```
-journalctl -u vc-mihari -f
-```
+    systemctl status vc-mihari
+    journalctl -u vc-mihari -f
 
 `.env` にトークンを置くので、リポジトリを配置するディレクトリと `.env` のパーミッションには注意してください。
 
+### 止める・やめる
+
+一時的に止める（サーバー再起動後はまた起動します）:
+
+    sudo systemctl stop vc-mihari
+
+自動起動をやめる:
+
+    sudo systemctl disable --now vc-mihari
+
+完全に削除する:
+
+    sudo systemctl disable --now vc-mihari
+    sudo rm /etc/systemd/system/vc-mihari.service
+    sudo systemctl daemon-reload
+
+`stop` と `disable` は別物です。`stop` は今動いているプロセスを止めるだけで、サーバーを再起動すると自動的に立ち上がります。自動起動を切りたい場合は `disable` が必要です。`disable --now` は両方を同時に行います。
+
+設定を変更したときは、`/etc/systemd/system/vc-mihari.service` を編集（またはリポジトリの雛形をコピーし直し）してから:
+
+    sudo systemctl daemon-reload
+    sudo systemctl restart vc-mihari
 ## 名前の由来
 
 Discord のボイスチャンネルを見張る側なので「みはり」と名付けました。みはりといえば『お兄ちゃんはおしまい!』の緒山みはりだろう、ということで、通知を受け取る Slack 側は兄でもあり妹でもある「まひろ」ということになっています。
