@@ -1,0 +1,19 @@
+{
+  "name": "vc-mihari",
+  "version": "1.0.0",
+  "description": "Discord のボイスチャンネルの在室状況を Slack に通知する常駐 Bot",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node --env-file=.env bot.js",
+    "test": "node test-notification.js"
+  },
+  "keywords": ["discord", "discord-bot", "slack", "slack-webhook", "notification"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.27.0"
+  }
+}

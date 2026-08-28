@@ -1,0 +1,23 @@
+[Unit]
+Description=vc-mihari - Discord voice channel headcount to Slack
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+
+# 実行ユーザーと設置先を環境に合わせて書き換えてください
+User=YOUR_USER
+WorkingDirectory=/path/to/vc-mihari
+
+# node のパスは `which node` で確認してください
+ExecStart=/usr/bin/node --env-file=.env bot.js
+
+# discord.js は接続が切れたとき終了コード0で落ちることがあるため always
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
