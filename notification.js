@@ -2,7 +2,7 @@
 
 const messages = require('./messages');
 
-// 通知メッセージを組み立てる純粋関数群。
+// 通知メッセージを組み立てる関数群。
 // Discord/Slackに接続せず、単体でテストできるようにこのファイルに切り出している。
 
 const LARGE_GROUP_THRESHOLD = 5;
