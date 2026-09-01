@@ -2,8 +2,9 @@
 
 const messages = require('./messages');
 
-// 通知メッセージを組み立てる関数群。
-// Discord/Slackに接続せず、単体でテストできるようにこのファイルに切り出している。
+// 通知メッセージ/Slack payload を組み立てる関数群。
+// Discord/Slackに接続しないので、単体でテストしやすい。
+// （pickTemplate は Math.random を使うため、厳密には純粋ではない）
 
 const LARGE_GROUP_THRESHOLD = 5;
 
